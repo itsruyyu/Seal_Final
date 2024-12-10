@@ -35,15 +35,6 @@ module "nacl" {
   nacl_rules = var.nacl_rules
 }
 
-module "cloudfront" {
-  source              = "./modules/cloudfront"
-  origin_domain_name  = var.origin_domain_name
-  default_cache_behavior = var.default_cache_behavior
-  price_class         = var.price_class
-  geo_restriction     = var.geo_restriction
-  origin_ssl_protocols = var.origin_ssl_protocols
-}
-
 module "autoscaling" {
   source             = "./modules/autoscaling"
   min_size           = var.min_size
