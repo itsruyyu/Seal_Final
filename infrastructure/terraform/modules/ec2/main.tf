@@ -1,4 +1,4 @@
-8khresource "aws_security_group" "ssh_sg" {
+resource "aws_security_group" "ssh_sg" {
   name        = "ssh_security_group"
   description = "Allow SSH access"
   vpc_id      = var.vpc_id
