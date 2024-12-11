@@ -19,7 +19,6 @@ resource "aws_autoscaling_group" "web" {
   launch_configuration      = aws_launch_configuration.web.id
   health_check_type         = "EC2"
   health_check_grace_period = 300
-  availability_zones        = var.availability_zones
 
   tag {
     key                 = "Name"

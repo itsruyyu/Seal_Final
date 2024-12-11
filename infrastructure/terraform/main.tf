@@ -8,8 +8,15 @@ module "vpc" {
 
 resource "aws_security_group" "web" {
   name        = "${var.project_name}-web-sg"
-  description = "Allow HTTP and HTTPS traffic for EC2 instances"
+  description = "Allow HTTP, HTTPS, and SSH traffic for EC2 instances"
   vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     from_port   = 80
@@ -72,7 +79,7 @@ module "rds" {
   db_password         = var.db_password
   parameter_group_name = var.parameter_group_name
   publicly_accessible = var.publicly_accessible
-  subnet_group        = module.vpc.public_subnet_ids
+  subnet_group        = module.vpc.public_subnet_ids[0]
   security_group_id   = aws_security_group.rds.id
   project_name        = var.project_name
 }
