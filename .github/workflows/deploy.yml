@@ -1,24 +1,45 @@
-name: Deploy OpenSID to AWS
 
+name: Deploy to AWS
+
+# Event yang memicu workflow
 on:
   push:
     branches:
       - main
 
+# Job untuk CI/CD
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
+    # Step 1: Checkout kode sumber
+    - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Set up Terraform
+    # Step 2: Setup Terraform
+    - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.4.0
+        terraform_version: 1.5.0
 
+    # Step 3: Terraform Init
     - name: Initialize Terraform
       run: terraform init
 
-    - name: Apply Terraform
+    # Step 4: Terraform Plan
+    - name: Terraform Plan
+      run: terraform plan
+
+    # Step 5: Terraform Apply
+    - name: Terraform Apply
       run: terraform apply -auto-approve
+
+    # Step 6: Deploy Aplikasi ke EC2
+    - name: Deploy Application
+      run: |
+        ssh -o StrictHostKeyChecking=no -i your-key.pem ec2-user@<EC2-PUBLIC-IP> << 'EOF'
+        docker pull your-docker-repo/opensid:latest
+        docker stop $(docker ps -q --filter "name=opensid") || true
+        docker run -d -p 80:80 --name opensid your-docker-repo/opensid:latest
+        EOF
