@@ -1,38 +1,74 @@
 variable "aws_region" {
-  description = "AWS Region"
+  description = "AWS region to deploy resources"
   type        = string
-  default     = "us-west-2"
 }
 
 variable "cidr_block" {
-  description = "CIDR block for VPC"
+  description = "CIDR block for the VPC"
   type        = string
-  default     = "10.0.0.0/16"
+}
+
+variable "public_subnet_cidr_blocks" {
+  description = "List of CIDR blocks for public subnets"
+  type        = list(string)
+}
+
+variable "private_subnet_cidr_blocks" {
+  description = "List of CIDR blocks for private subnets"
+  type        = list(string)
 }
 
 variable "ami_id" {
-  description = "AMI ID for EC2 Instance"
+  description = "AMI ID for EC2 instances"
   type        = string
 }
 
 variable "instance_type" {
-  description = "Instance type for EC2"
+  description = "Instance type for EC2 instances"
   type        = string
-  default     = "t2.micro"
+}
+
+variable "key_name" {
+  description = "Key pair name for SSH access"
+  type        = string
+}
+
+variable "security_group_ids" {
+  description = "List of security group IDs"
+  type        = list(string)
 }
 
 variable "db_username" {
-  description = "RDS Database username"
+  description = "RDS database username"
   type        = string
 }
 
 variable "db_password" {
-  description = "RDS Database password"
+  description = "RDS database password"
   type        = string
-  sensitive   = true
 }
 
-variable "vpc_security_group_ids" {
-  description = "List of VPC security group IDs for RDS"
-  type        = list(string)
+variable "db_instance_class" {
+  description = "RDS instance class"
+  type        = string
+}
+
+variable "allocated_storage" {
+  description = "RDS storage size in GB"
+  type        = number
+}
+
+variable "min_size" {
+  description = "Minimum number of instances in Auto Scaling group"
+  type        = number
+}
+
+variable "max_size" {
+  description = "Maximum number of instances in Auto Scaling group"
+  type        = number
+}
+
+variable "desired_capacity" {
+  description = "Desired number of instances in Auto Scaling group"
+  type        = number
 }

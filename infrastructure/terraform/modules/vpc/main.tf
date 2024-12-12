@@ -1,23 +1,31 @@
-module "vpc" {
-  source = "modules/vpc"
-  name   = "OpenSID VPC"
-  cidr   = var.cidr_block
-
-  enable_dns_support = true
+resource "aws_vpc" "this" {
+  cidr_block           = var.cidr_block
+  enable_dns_support   = true
   enable_dns_hostnames = true
 
-  public_subnets = ["10.0.1.0/24"]
-  private_subnets = ["10.0.2.0/24"]
+  tags = {
+    Name = "${var.name_prefix}-vpc"
+  }
 }
 
-output "vpc_id" {
-  value = module.vpc.vpc_id
+resource "aws_subnet" "public" {
+  count      = length(var.public_subnet_cidr_blocks)
+  vpc_id     = aws_vpc.this.id
+  cidr_block = var.public_subnet_cidr_blocks[count.index]
+
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "${var.name_prefix}-public-subnet-${count.index}"
+  }
 }
 
-output "public_subnets" {
-  value = module.vpc.public_subnets
-}
+resource "aws_subnet" "private" {
+  count      = length(var.private_subnet_cidr_blocks)
+  vpc_id     = aws_vpc.this.id
+  cidr_block = var.private_subnet_cidr_blocks[count.index]
 
-output "private_subnets" {
-  value = module.vpc.private_subnets
+  tags = {
+    Name = "${var.name_prefix}-private-subnet-${count.index}"
+  }
 }

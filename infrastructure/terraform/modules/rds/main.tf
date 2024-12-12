@@ -1,21 +1,20 @@
-resource "aws_db_instance" "example" {
-  identifier        = "example-db"
-  engine            = "mysql"
-  instance_class    = "db.t2.micro"
-  allocated_storage = 20
-  username          = var.db_username
-  password          = var.db_password
-  db_name           = "exampledb"
-  skip_final_snapshot = true
-  multi_az          = false
-  storage_type      = "gp2"
-  vpc_security_group_ids = [var.vpc_security_group_id]
-
-  tags = {
-    Name = "Example RDS Instance"
-  }
+resource "aws_db_instance" "this" {
+  allocated_storage    = var.allocated_storage
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = var.db_instance_class
+  db_name              = "opensid_db"
+  username             = var.db_username
+  password             = var.db_password
+  vpc_security_group_ids = var.vpc_security_group_ids
+  db_subnet_group_name = aws_db_subnet_group.this.name
 }
 
-output "endpoint" {
-  value = aws_db_instance.example.endpoint
+resource "aws_db_subnet_group" "this" {
+  name       = "${var.name_prefix}-db-subnet-group"
+  subnet_ids = var.subnet_ids
+
+  tags = {
+    Name = "${var.name_prefix}-db-subnet-group"
+  }
 }

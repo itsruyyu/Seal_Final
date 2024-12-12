@@ -1,36 +1,36 @@
-8khresource "aws_security_group" "ssh_sg" {
-  name        = "ssh_security_group"
-  description = "Allow SSH access"
-  vpc_id      = var.vpc_id
+resource "aws_launch_template" "this" {
+  name_prefix   = "${var.name_prefix}-"
+  image_id      = var.ami_id
+  instance_type = var.instance_type
+  key_name      = var.key_name
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }g
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups             = var.security_group_ids
+  }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+  tag_specifications {
+    resource_type = "instance"
+    tags = {
+      Name = "${var.name_prefix}-instance"
+    }
   }
 }
 
-resource "aws_instance" "example" {
-  ami             = var.ami_id
-  instance_type   = var.instance_type
-  subnet_id       = var.subnet_id
-  security_groups = [aws_security_group.ssh_sg.id]
+resource "aws_autoscaling_group" "this" {
+  desired_capacity     = var.desired_capacity
+  max_size             = var.max_size
+  min_size             = var.min_size
+  vpc_zone_identifier  = var.subnet_ids
 
-  tags = {
-    Name = "Example Instance"
+  launch_template {
+    id      = aws_launch_template.this.id
+    version = "$Latest"
   }
 
-  key_name = tls_private_key.example.private_key_pem
-}
-
-output "public_ip" {
-  value = aws_instance.example.public_ip
+  tag {
+    key                 = "Name"
+    value               = "${var.name_prefix}-asg"
+    propagate_at_launch = true
+  }
 }

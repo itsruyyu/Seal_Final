@@ -1,9 +1,3 @@
-output "public_ip" {
-  description = "Public IP of the EC2 instance"
-  value       = aws_instance.example.public_ip
-}
-
-output "instance_id" {
-  description = "ID of the EC2 instance"
-  value       = aws_instance.example.id
+output "autoscaling_group_name" {
+  value = aws_autoscaling_group.this.name
 }

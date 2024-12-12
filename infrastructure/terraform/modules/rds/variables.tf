@@ -1,26 +1,30 @@
+variable "name_prefix" {
+  description = "Prefix for naming resources"
+  type        = string
+}
+
 variable "db_username" {
-  description = "RDS DB username"
+  description = "RDS database username"
   type        = string
 }
 
 variable "db_password" {
-  description = "RDS DB password"
+  description = "RDS database password"
   type        = string
 }
 
 variable "db_instance_class" {
-  description = "RDS DB instance class"
+  description = "RDS instance class"
   type        = string
 }
 
 variable "allocated_storage" {
-  description = "Allocated storage for RDS"
+  description = "RDS storage size in GB"
   type        = number
-  default     = 20
 }
 
 variable "vpc_security_group_ids" {
-  description = "List of VPC security group IDs"
+  description = "List of security group IDs for RDS"
   type        = list(string)
 }
 
