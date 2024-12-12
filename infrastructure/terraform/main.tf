@@ -34,6 +34,7 @@ module "rds" {
   name_prefix          = var.name_prefix
 }
 
+
 module "s3" {
   source = "./modules/s3"
   bucket_name = var.bucket_name
