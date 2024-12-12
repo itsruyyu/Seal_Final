@@ -16,11 +16,6 @@ variable "desired_capacity" {
   default     = 2
 }
 
-variable "subnet_ids" {
-  description = "List of subnet IDs for the Auto Scaling group"
-  type        = list(string)
-}
-
 variable "ami_id" {
   description = "AMI ID for EC2 instances in the Auto Scaling group"
   type        = string
@@ -29,4 +24,16 @@ variable "ami_id" {
 variable "instance_type" {
   description = "Instance type for EC2 instances in the Auto Scaling group"
   type        = string
+  default = "t2.micro"
 }
+
+variable "security_group_id" {
+  description = "List of security group IDs"
+  type        = list(string)
+}
+
+variable "subnet_ids" {
+  description = "List of subnet IDs for the Auto Scaling group"
+  type        = list(string)
+}
+

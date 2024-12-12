@@ -9,7 +9,7 @@ resource "aws_db_instance" "example" {
   skip_final_snapshot = true
   multi_az          = false
   storage_type      = "gp2"
-  vpc_security_group_ids = [var.vpc_security_group_id]
+  vpc_security_group_ids = var.vpc_security_group_ids
 
   tags = {
     Name = "Example RDS Instance"

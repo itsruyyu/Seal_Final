@@ -1,9 +1,8 @@
 resource "aws_launch_configuration" "example" {
-  name          = "example-launch-config"
-  image_id      = var.ami_id
-  instance_type = var.instance_type
-  key_name      = tls_private_key.example.private_key_pem
-  security_groups = [var.security_group_id]
+  name            = "example-launch-config"
+  image_id        = var.ami_id
+  instance_type   = var.instance_type
+  security_groups = var.security_group_id
 }
 
 resource "aws_autoscaling_group" "example" {
