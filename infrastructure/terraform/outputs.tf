@@ -1,6 +1,16 @@
+output "private_key" {
+  description = "Private key for SSH access"
+  value       = tls_private_key.this.private_key_pem
+  sensitive   = true
+}
+
 output "vpc_id" {
   description = "ID of the VPC"
   value       = module.vpc.vpc_id
+}
+
+output "security_group_id" {
+  value = aws_security_group.default.id
 }
 
 output "public_subnets" {
