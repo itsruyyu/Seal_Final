@@ -3,3 +3,4 @@ infrastructure/terraform/.terraform
 .pem
 infrastructure/terraform/terraform.tfstate
 infrastructure/terraform/terraform.tfstate.backup
+keys/

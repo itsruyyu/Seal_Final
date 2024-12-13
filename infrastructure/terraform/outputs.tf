@@ -1,6 +1,6 @@
 output "private_key" {
   description = "Private key for SSH access"
-  value       = tls_private_key.this.private_key_pem
+  value       = aws_key_pair.generated_key.key_name
   sensitive   = true
 }
 

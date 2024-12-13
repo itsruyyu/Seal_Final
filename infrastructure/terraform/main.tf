@@ -2,15 +2,22 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "tls_private_key" "this" {
+resource "aws_key_pair" "generated_key" {
+  key_name   = "${var.name_prefix}-key"
+  public_key = tls_private_key.generated.public_key_openssh
+}
+
+resource "tls_private_key" "generated" {
   algorithm = "RSA"
   rsa_bits  = 2048
 }
 
-resource "aws_key_pair" "this" {
-  key_name   = "${var.name_prefix}-keypair"
-  public_key = tls_private_key.this.public_key_openssh
+resource "local_file" "private_key" {
+  content  = tls_private_key.generated.private_key_pem
+  filename = "${path.module}/keys/${var.name_prefix}-private-key.pem"
 }
+
+
 
 module "vpc" {
   source                   = "./modules/vpc"
@@ -44,7 +51,7 @@ module "ec2" {
   source               = "./modules/ec2"
   ami_id               = var.ami_id
   instance_type        = var.instance_type
-  key_name             = "TestingOpenSID"
+  key_name             = aws_key_pair.generated_key.key_name
   security_group_ids   = [aws_security_group.default.id]
   subnet_ids           = module.vpc.public_subnets
   desired_capacity     = var.desired_capacity
