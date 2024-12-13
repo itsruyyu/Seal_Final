@@ -1,5 +1,5 @@
 variable "name_prefix" {
-  description = "Prefix for naming resources"
+  description = "Prefix for naming RDS resources"
   type        = string
 }
 
@@ -29,6 +29,6 @@ variable "vpc_security_group_ids" {
 }
 
 variable "subnet_ids" {
-  description = "List of subnet IDs for RDS"
+  description = "List of subnet IDs for RDS instances"
   type        = list(string)
 }

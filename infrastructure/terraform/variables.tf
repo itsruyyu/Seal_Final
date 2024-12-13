@@ -4,21 +4,6 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "cidr_block" {
-  description = "CIDR block for the VPC"
-  type        = string
-}
-
-variable "public_subnet_cidr_blocks" {
-  description = "List of CIDR blocks for public subnets"
-  type        = list(string)
-}
-
-variable "private_subnet_cidr_blocks" {
-  description = "List of CIDR blocks for private subnets"
-  type        = list(string)
-}
-
 variable "ami_id" {
   description = "AMI ID for EC2 instances"
   type        = string
@@ -26,11 +11,6 @@ variable "ami_id" {
 
 variable "instance_type" {
   description = "Instance type for EC2 instances"
-  type        = string
-}
-
-variable "key_name" {
-  description = "Key pair name for SSH access"
   type        = string
 }
 
@@ -75,8 +55,3 @@ variable "name_prefix" {
   default     = "opensid"
 }
 
-variable "bucket_name" {
-  description = "Name of the S3 bucket"
-  type        = string
-  default     = "opensidseal"
-}

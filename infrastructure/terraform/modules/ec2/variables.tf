@@ -1,5 +1,5 @@
 variable "name_prefix" {
-  description = "Prefix for naming resources"
+  description = "Prefix for naming EC2 resources"
   type        = string
 }
 
@@ -24,21 +24,21 @@ variable "security_group_ids" {
 }
 
 variable "subnet_ids" {
-  description = "List of subnet IDs for Auto Scaling Group"
+  description = "List of subnet IDs for EC2 instances"
   type        = list(string)
 }
 
 variable "desired_capacity" {
-  description = "Desired number of instances in Auto Scaling Group"
+  description = "Desired number of EC2 instances in Auto Scaling Group"
   type        = number
 }
 
 variable "min_size" {
-  description = "Minimum number of instances in Auto Scaling Group"
+  description = "Minimum number of EC2 instances in Auto Scaling Group"
   type        = number
 }
 
 variable "max_size" {
-  description = "Maximum number of instances in Auto Scaling Group"
+  description = "Maximum number of EC2 instances in Auto Scaling Group"
   type        = number
 }

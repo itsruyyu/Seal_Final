@@ -2,10 +2,9 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/aws" {
-  version     = "5.81.0"
-  constraints = ">= 4.0.0"
+  version = "5.81.0"
   hashes = [
-    "h1:Z3G9/bESudmrRsgGrLYQbVfNOQcSYGO3uqTtMBeIxhY=",
+    "h1:BsyuVYH+grE2o7G8U8CcqY25H8xFTTI17J7JEa0sX3U=",
     "zh:05534adf6f02d6ec26dbeb37a4d2b6edb63f12dc9ab5cc05ab89329fcd793194",
     "zh:1d224056866abc4c8f893d55bc6493b73688126fbeaf017ecfbcf5d2f16649c4",
     "zh:486d28a0a4af2ea23964a8e9087d66e8d794e3438976633b8554684a9237499d",
@@ -28,7 +27,6 @@ provider "registry.terraform.io/hashicorp/local" {
   version = "2.5.2"
   hashes = [
     "h1:ERAqA7AfanDulZ9OgJDITGM27OnwiYjUNXezJ5zbBvQ=",
-    "h1:JlMZD6nYqJ8sSrFfEAH0Vk/SL8WLZRmFaMUF9PJK5wM=",
     "zh:136299545178ce281c56f36965bf91c35407c11897f7082b3b983d86cb79b511",
     "zh:3b4486858aa9cb8163378722b642c57c529b6c64bfbfc9461d940a84cd66ebea",
     "zh:4855ee628ead847741aa4f4fc9bed50cfdbf197f2912775dd9fe7bc43fa077c0",
@@ -47,7 +45,6 @@ provider "registry.terraform.io/hashicorp/local" {
 provider "registry.terraform.io/hashicorp/random" {
   version = "3.6.3"
   hashes = [
-    "h1:Fnaec9vA8sZ8BXVlN3Xn9Jz3zghSETIKg7ch8oXhxno=",
     "h1:N2IQabOiZC5eCEGrfgVS6ChVmRDh1ENtfHgGjnV4QQQ=",
     "zh:04ceb65210251339f07cd4611885d242cd4d0c7306e86dda9785396807c00451",
     "zh:448f56199f3e99ff75d5c0afacae867ee795e4dfda6cb5f8e3b2a72ec3583dd8",
@@ -68,7 +65,6 @@ provider "registry.terraform.io/hashicorp/tls" {
   version = "4.0.6"
   hashes = [
     "h1:N7VxdRDiNZoRS9dnXJ+QuKWKn514ahS+U6f9K3cF44s=",
-    "h1:dYSb3V94K5dDMtrBRLPzBpkMTPn+3cXZ/kIJdtFL+2M=",
     "zh:10de0d8af02f2e578101688fd334da3849f56ea91b0d9bd5b1f7a243417fdda8",
     "zh:37fc01f8b2bc9d5b055dc3e78bfd1beb7c42cfb776a4c81106e19c8911366297",
     "zh:4578ca03d1dd0b7f572d96bd03f744be24c726bfd282173d54b100fd221608bb",

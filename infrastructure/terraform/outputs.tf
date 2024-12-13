@@ -4,24 +4,15 @@ output "private_key" {
   sensitive   = true
 }
 
-output "vpc_id" {
-  description = "ID of the VPC"
-  value       = module.vpc.vpc_id
-}
 
 output "security_group_id" {
   value = aws_security_group.default.id
 }
 
-output "public_subnets" {
-  description = "List of public subnets"
-  value       = module.vpc.public_subnets
+output "vpc_id" {
+  value = data.aws_vpc.default.id
 }
 
-output "private_subnets" {
-  description = "List of private subnets"
-  value       = module.vpc.private_subnets
-}
 
 output "autoscaling_group_name" {
   description = "Name of the Auto Scaling Group"
@@ -32,3 +23,8 @@ output "rds_endpoint" {
   description = "RDS endpoint"
   value       = module.rds.endpoint
 }
+
+output "public_subnets" {
+  value = [for subnet in data.aws_subnet.default : subnet.id]
+}
+
