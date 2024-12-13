@@ -12,35 +12,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout Kode
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+    # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Setup Terraform
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.5.5
+    # Setup Terraform (Auto-detect latest version)
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
 
+    # Terraform Init
+      - name: Terraform Init
+        run: terraform init
 
-
-    # Step 3: Terraform Init
-    - name: Initialize Terraform
-      run: terraform init
-      working-directory: ./infrastructure/terraform
-
-    - name: Plan Terraform
-      run: terraform plan
-      working-directory: ./infrastructure/terraform
-
-    # Step 4: Terraform Plan
-    - name: Terraform Plan
-      run: terraform plan
-
-    # Step 5: Terraform Apply
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      working-directory: ./infrastructure/terraform
+    # Terraform Apply
+      - name: Terraform Apply
+        env:
+          TF_VAR_name_prefix: "workflow-prefix"
+          TF_VAR_bucket_name: "workflow-bucket"
+        run: terraform apply -auto-approve
 
     # Step 3: Setup Docker
     - name: Login to DockerHub
