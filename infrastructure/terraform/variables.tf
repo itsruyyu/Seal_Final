@@ -1,6 +1,7 @@
 variable "aws_region" {
   description = "AWS region to deploy resources"
   type        = string
+  default     = "us-east-1"
 }
 
 variable "cidr_block" {
@@ -31,11 +32,6 @@ variable "instance_type" {
 variable "key_name" {
   description = "Key pair name for SSH access"
   type        = string
-}
-
-variable "security_group_ids" {
-  description = "List of security group IDs"
-  type        = list(string)
 }
 
 variable "db_username" {
@@ -71,4 +67,14 @@ variable "max_size" {
 variable "desired_capacity" {
   description = "Desired number of instances in Auto Scaling group"
   type        = number
+}
+
+variable "name_prefix" {
+  description = "Prefix for naming resources"
+  type        = string
+}
+
+variable "bucket_name" {
+  description = "Name of the S3 bucket"
+  type        = string
 }
