@@ -44,7 +44,7 @@ module "ec2" {
   source               = "./modules/ec2"
   ami_id               = var.ami_id
   instance_type        = var.instance_type
-  key_name             = aws_key_pair.this.key_name
+  key_name             = "TestingOpenSID"
   security_group_ids   = [aws_security_group.default.id]
   subnet_ids           = module.vpc.public_subnets
   desired_capacity     = var.desired_capacity
