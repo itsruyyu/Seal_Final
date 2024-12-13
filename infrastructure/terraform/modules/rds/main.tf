@@ -11,10 +11,10 @@ resource "aws_db_instance" "this" {
 }
 
 resource "aws_db_subnet_group" "this" {
-  name       = "${var.name_prefix}-db-subnet-group"
+  name       = "${var.name_prefix}-db-subnet-groupnih"
   subnet_ids = var.subnet_ids
 
   tags = {
-    Name = "${var.name_prefix}-db-subnet-group"
+    Name = "${var.name_prefix}-db-subnet-groupnih"
   }
 }
